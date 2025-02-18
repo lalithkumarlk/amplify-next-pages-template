@@ -10,8 +10,7 @@ export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   const { user,signOut } = useAuthenticator();
   
-  async function listTodos() {
-    
+  function listTodos() {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
@@ -24,11 +23,7 @@ export default function App() {
    function createTodo() {
     client.models.Todo.create({
       content: window.prompt("Todo content")
-    },
-    {
-      authMode: 'userPool'
-    }
-  );
+    });
   }
 
     
